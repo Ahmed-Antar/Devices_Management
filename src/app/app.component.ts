@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { reject } from 'q';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +9,16 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'mon-projet-angular';
   isAuth = false ;
+  lastUpdate = new Promise(
+    (resolve, reject) => {
+      const date = new Date();
+      setTimeout(
+        () => {
+          resolve(date);
+        }, 2000
+      );
+    }
+  )
 
   appareils = [
     {
@@ -23,7 +34,7 @@ export class AppComponent {
       status: 'éteint'
     }
   ];
-  
+
   constructor(){
     setTimeout(
       () => {
