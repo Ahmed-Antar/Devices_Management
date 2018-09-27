@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { reject } from 'q';
+import { AppareilService } from './services/appareil.services';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +10,8 @@ import { reject } from 'q';
 export class AppComponent {
   title = 'mon-projet-angular';
   isAuth = false ;
+  appareils : any[];
+
   lastUpdate = new Promise(
     (resolve, reject) => {
       const date = new Date();
@@ -20,26 +23,15 @@ export class AppComponent {
     }
   )
 
-  appareils = [
-    {
-      name: 'Machine à laver',
-      status: 'éteint'
-    },
-    {
-      name: 'Frigo',
-      status: 'allumé'
-    },
-    {
-      name: 'Ordinateur',
-      status: 'éteint'
-    }
-  ];
-
-  constructor(){
+  constructor( private appareilService : AppareilService ){
     setTimeout(
       () => {
         this.isAuth = true;
       }, 4000
     );
+  }
+
+  ngOnInit(){
+   this.appareils = this.appareilService.appareils;
   }
 }
