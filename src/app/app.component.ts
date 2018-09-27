@@ -34,4 +34,14 @@ export class AppComponent {
   ngOnInit(){
    this.appareils = this.appareilService.appareils;
   }
+
+  onAllumer(){
+    this.appareilService.switchOnAll();
+  
+  }
+
+  onEteindre(){
+    this.appareilService.switchOffAll();
+  
+  }
 }
